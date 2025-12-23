@@ -53,8 +53,9 @@ public class AuctionService {
 
         // Create new auction
         Auction auction = new Auction();
-        auction.setStartTime(slot.getStartTime());
-        auction.setEndTime(slot.getEndTime());
+        auction.setTimeSlot(slot);
+        auction.getTimeSlot().setStartTime(slot.getStartTime());
+        auction.getTimeSlot().setEndTime(slot.getEndTime());
         auction.setStatus(AuctionStatus.UPCOMING);
 
         // Save the auction
@@ -118,6 +119,8 @@ public class AuctionService {
                 // Determine the highest bid for this product
                 if (product.getWinningBidAmount() != null) {
                     product.setSold(true);
+                    System.out.println("Product " + product.getName() + " sold to "
+                            + product.getBuyer().getUsername() + " for " + product.getWinningBidAmount());
                     productRepository.save(product);
                 }
             }

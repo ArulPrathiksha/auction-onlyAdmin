@@ -15,7 +15,7 @@ public interface AuctionRepository extends JpaRepository<Auction, Long> {
     List<Auction> findByStatus(AuctionStatus status);
 
 
-    @Query("select case when count(a)>0 then true else false end from Auction a where a.startTime < :end and a.endTime > :start")
+    @Query("select case when count(a)>0 then true else false end from Auction a where a.timeSlot.startTime < :end and a.timeSlot.endTime > :start")
     boolean existsOverlapping(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
 

@@ -27,14 +27,14 @@ public class AuctionStatusScheduler {
 
         List<Auction> upcoming = auctionRepository.findByStatus(AuctionStatus.UPCOMING);
         for (Auction a : upcoming) {
-            if (!a.getStartTime().isAfter(now)) {
+            if (!a.getTimeSlot().getStartTime().isAfter(now)) {
                 auctionService.markLive(a);
             }
         }
 
         List<Auction> live = auctionRepository.findByStatus(AuctionStatus.LIVE);
         for (Auction a : live) {
-            if (!a.getEndTime().isAfter(now)) {
+            if (!a.getTimeSlot().getEndTime().isAfter(now)) {
                 auctionService.markEnded(a);
             }
         }

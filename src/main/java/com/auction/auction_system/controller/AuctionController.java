@@ -57,6 +57,6 @@ public class AuctionController {
     }
 
     private AuctionResponse toResponse(Auction auction) {
-        return new AuctionResponse(auction.getId(), auction.getStartTime(), auction.getEndTime(), auction.getStatus());
+        return new AuctionResponse(auction.getId(), auction.getTimeSlot().getStartTime(), auction.getTimeSlot().getEndTime(), auction.getStatus());
     }
 }

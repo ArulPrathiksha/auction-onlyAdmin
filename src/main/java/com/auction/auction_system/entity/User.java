@@ -13,7 +13,6 @@ public class User {
     private String password; // Store hashed password
     private String role; // USER, SELLER, ADMIN
 
-    // Additional user-specific fields like email, contact number, etc.
     private String email;
     private String contactNumber;
 

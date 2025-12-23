@@ -1,7 +1,9 @@
 package com.auction.auction_system.service;
 
 import com.auction.auction_system.entity.Product;
+import com.auction.auction_system.entity.User;
 import com.auction.auction_system.repository.ProductRepository;
+import com.auction.auction_system.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class BidService {
 
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public BidService(ProductRepository productRepository) {
+    public BidService(ProductRepository productRepository , UserRepository userRepository) {
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -37,8 +41,9 @@ public class BidService {
         product.setWinningBidAmount(amount);
         product.setBidPlacedTime(java.time.LocalDateTime.now());
 
-        // Optionally, you can associate the user who placed the winning bid (optional)
-        // product.setBuyer(user);
+        User bidder = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        product.setBuyer(bidder);
 
         productRepository.save(product);
     }
