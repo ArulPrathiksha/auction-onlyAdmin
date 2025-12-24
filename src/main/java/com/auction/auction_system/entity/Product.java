@@ -2,6 +2,9 @@ package com.auction.auction_system.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 
@@ -31,6 +34,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "auction_id", referencedColumnName = "id")
+    @JsonIgnore
     private Auction auction; // Auction this product belongs to
 
     public Product() {

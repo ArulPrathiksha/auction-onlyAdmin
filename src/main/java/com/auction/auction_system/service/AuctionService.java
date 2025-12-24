@@ -63,7 +63,7 @@ public class AuctionService {
 
         // Mark the time slot as booked
         slot.setBooked(true);
-        slot.setAuctionId(savedAuction.getId());
+        // slot.setAuctionId(savedAuction.getId());
         timeSlotRepository.save(slot);
 
         // Create and associate products with the auction

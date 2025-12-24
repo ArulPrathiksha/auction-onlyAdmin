@@ -21,7 +21,7 @@ public class TimeSlot {
 
     private boolean booked = false;
 
-    private Long auctionId;
+    // private Long auctionId;
 
     // getters/setters
     public Long getId() {
@@ -56,11 +56,11 @@ public class TimeSlot {
         this.booked = booked;
     }
 
-    public Long getAuctionId() {
-        return auctionId;
-    }
+    // public Long getAuctionId() {
+    //     return auctionId;
+    // }
 
-    public void setAuctionId(Long auctionId) {
-        this.auctionId = auctionId;
-    }
+    // public void setAuctionId(Long auctionId) {
+    //     this.auctionId = auctionId;
+    // }
 }

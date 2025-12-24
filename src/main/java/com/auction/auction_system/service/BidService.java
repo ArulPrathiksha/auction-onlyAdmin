@@ -34,6 +34,11 @@ public class BidService {
             throw new IllegalStateException("Product already sold");
         }
 
+        // Check if the bid is higher than or equal to the product's starting price
+    if (amount.compareTo(product.getPrice()) < 0) {
+        throw new IllegalArgumentException("Bid must be greater than or equal to the starting price of the product");
+    }
+
         // Check if the bid is higher than the current highest bid
         BigDecimal currentHighestBid = product.getWinningBidAmount();
         if (currentHighestBid != null && amount.compareTo(currentHighestBid) <= 0) {
