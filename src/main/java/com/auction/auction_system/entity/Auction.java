@@ -14,7 +14,7 @@ public class Auction {
     @Enumerated(EnumType.STRING)
     private AuctionStatus status;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "time_slot_id", nullable = false, unique = true)
     private TimeSlot timeSlot;
 

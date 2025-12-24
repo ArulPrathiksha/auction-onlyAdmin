@@ -3,7 +3,6 @@ package com.auction.auction_system.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "time_slots", uniqueConstraints = {
@@ -22,7 +21,6 @@ public class TimeSlot {
 
     private boolean booked = false;
 
-    // optional link to auction when booked
     private Long auctionId;
 
     // getters/setters

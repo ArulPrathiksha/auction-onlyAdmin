@@ -3,13 +3,10 @@ package com.auction.auction_system.controller;
 import com.auction.auction_system.dto.AuctionRequest;
 import com.auction.auction_system.dto.AuctionResponse;
 import com.auction.auction_system.entity.Auction;
-import com.auction.auction_system.entity.Product;
 import com.auction.auction_system.service.AuctionService;
-import com.auction.auction_system.service.BidService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 

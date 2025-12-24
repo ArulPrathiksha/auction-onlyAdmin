@@ -1,33 +1,29 @@
 package com.auction.auction_system.controller;
 
-import com.auction.auction_system.entity.Participant;
-import com.auction.auction_system.repository.AuctionRepository;
-import com.auction.auction_system.repository.ParticipantRepository;
+import com.auction.auction_system.service.ParticipantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auctions")
 public class ParticipantController {
-    private final ParticipantRepository participantRepository;
-    private final AuctionRepository auctionRepository;
 
-    public ParticipantController(ParticipantRepository participantRepository, AuctionRepository auctionRepository) {
-        this.participantRepository = participantRepository;
-        this.auctionRepository = auctionRepository;
+    private final ParticipantService participantService;
+
+    public ParticipantController(ParticipantService participantService) {
+        this.participantService = participantService;
     }
 
     @PostMapping("/{id}/register")
     public ResponseEntity<?> register(@PathVariable Long id, @RequestParam Long userId, @RequestParam(required = false) String proof) {
-        if (!auctionRepository.existsById(id)) return ResponseEntity.notFound().build();
-        if (participantRepository.findByAuctionIdAndUserId(id, userId).isPresent()) {
-            return ResponseEntity.status(409).body("Already registered");
+        // Call the service to register the user
+        String responseMessage = participantService.registerForAuction(id, userId, proof);
+        
+        // Return the response based on the service output
+        if (responseMessage.equals("Successfully registered for the auction.")) {
+            return ResponseEntity.ok(responseMessage);
         }
-        Participant p = new Participant();
-        p.setAuctionId(id);
-        p.setUserId(userId);
-        p.setProof(proof);
-        participantRepository.save(p);
-        return ResponseEntity.ok(p);
+        
+        return ResponseEntity.status(400).body(responseMessage); // Bad request if failed
     }
 }
